@@ -1,0 +1,20 @@
+\chapter{Circuit Breaker e Saga Pattern}
+\section{Circuit Breaker}
+\subsection{Cos'è?}
+Il Circuit Breaker è un Pattern utilizzato per prevenire che il fallimento di un servizio generi un `effetto a cascata' sugli altri servizi che interagiscono con esso.
+
+\subsection{Quando è utile e come funziona}
+La necessità di un Circuit Breaker si fa sentire quando un servizio diventa non disponibile o avente latenza così alta da risultare de facto inutilizzabile: questo potrebbe causare uno spreco di risorse - talvolta anche importante - da parte di un servizio che cerca di chiamarlo e rimane in attesa di risposta, che in alcuni casi potrebbe portare anche questo secondo servizio ad essere inutilizzabile.
+
+In casi come questo entra in gioco il Circuit Breaker, che in caso registri un numero eccessivo di fallimenti (banalmente, quando supera un certo treshold arbitrario) scatta e fa partire un periodo di timeout, dove tutte le richieste a tale servizio falliranno immediatamente. Alla fine del periodo di timeout lascerà passare un numero limitato di richieste: in caso queste arrivino con successo permetterà di riprendere normali operazioni, altrimenti fa ripartire il periodo di timeout.
+
+\section{Saga Pattern}
+Si tratta di un pattern utilizzato per mantenere dati coerenti durante operazioni che potrebbero richiedere l'impiego di servizi diversi: un esempio banale potrebbe essere il pagamento di un ordine in un e-commerce, dove devo non solo aggiornare la tabella degli ordini con l'oggetto appena acquistato, ma anche quella dei pagamenti, e ho bisogno che i dati rimangano coerenti attraverso l'intera operazione.
+
+Il Saga Pattern fa cioè in modo che l'ordine di esecuzione delle transazioni di una saga venga rispettato e che il loro effetto non venga compromesso da operazioni intermedie.
+
+Ci sono due tipi principali di approccio: 
+\begin{itemize}
+    \item choreography => nessun coordinatore, i servizi portano a termine la saga collaborando tra loro
+    \item orchestration => un orchestratore fa da controllo centrale per la corretta riuscita della saga
+\end{itemize}

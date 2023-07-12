@@ -1,0 +1,13 @@
+\chapter{Architettura a microservizi}
+\section{API Gateway}
+Si tratta di uno strumento di gestione di API situato a metà tra client e microservizi back-end, e funge da `single point of access' per l`API\@ Utilizzare questo strumento aiuta inoltre a dividere 
+
+Il funzionamento del gateway consiste nell`intercettare tutte le richieste e inviarle ai microservizi necessari, di cui conosce la posizione delle istanze grazie al Service Registry. Alcune funzioni abbastanza comuni di cui avvalersi tramite gateway possono essere autenticazione, limitazione di velocità, fatturazione\dots
+
+\section{Service Registry e Service Discovery}
+Un Service Registry è, come suggerisce il nome, un `registro' (ovvero un database) dei servizi, con le istanze disponibili e le posizioni dove sarà possibile reperirli.
+
+Ma come può il Service Registry sapere dove si trovano i servizi? Tramite il meccanismo del Service Discovery, attraverso il quale i servizi sono in grado di `registrarsi' al registry e comunicargli la propria posizione.
+
+A questo punto troviamo due casistiche: Client-Side e Server-Side Service Discovery. Nel caso del Client-Side il registry comunicherà le posizioni del servizio direttamente al client, che potrà quindi comunicare direttamente con il servizio; nel caso Server-Side, invece, avremo la presenza di un Load Balancer, che comunicherà con il client e gestirà quindi lui stesso le procedure di lookup.
+

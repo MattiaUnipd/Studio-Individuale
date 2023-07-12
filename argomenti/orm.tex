@@ -1,0 +1,37 @@
+\chapter{Object-Relational Mapping}
+\section{Cos'è}
+Si tratta di una tecnica per fare operazioni CRUD su un database all'interno di programmi OOP, generando oggetti che mappano le tabelle di un database con cui il programmatore potrà quindi interagire. 
+
+\section{Pro}
+\begin{itemize}
+    \item Semplifica la manipolazione di dati attraverso oggetti;
+    \item snellisce il codice;
+    \item protegge da attacchi come SQL injection grazie al filtraggio dati del framework;
+    \item rende più semplice passare da un database a un altro.
+\end{itemize}
+
+\dots
+
+\section{Cons}
+\begin{itemize}
+    \item Aumenta la complessità nell'utilizzo e debug del programma;
+    \item difficile da imparare;
+    \item non può rappresentare ogni tipo di query.
+\end{itemize}
+
+\section{Spring Data JPA}
+Spring Data JPA è una libreria che aggiunge un livello di astrazione al JPA provider, che può ad esempio essere Hibernate, un'implementazione di JPA\@
+
+Osserviamo alcuni concetti chiave:
+
+\subsection{Repository}
+Le repository sono interfacce che forniscono determinate funzionalità per la gestione di entità. Alcuni esempi di interfacce molto utilizzate sono \textbf{CrudRepository} e \textbf{ListCrudRepository}, che come dice il nome forniscono funzionalità di tipo CRUD, come la possibilità di salvare un'entità, ottenere una certa entità a partire da un determinato campo identificativo, cancellare un'entità\dots
+
+\subsection{Query Methods}
+Per dichiarare una query si procede in quattro passaggi:
+\begin{enumerate}
+    \item Si dichiara un'interfaccia che estenda Repository o una sua subclass (ad esempio CrudRepository già menzionata prima);
+    \item dichiarare le query desiderate nella nuova interfaccia;
+    \item configurare Spring per creare istanze proxy per queste interfacce tramite JavConfig o XML;
+    \item iniettare l'istanza della repository in una classe e utilizzarla.
+\end{enumerate}
