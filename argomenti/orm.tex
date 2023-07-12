@@ -27,6 +27,8 @@ Osserviamo alcuni concetti chiave:
 \subsection{Repository}
 Le repository sono interfacce che forniscono determinate funzionalità per la gestione di entità. Alcuni esempi di interfacce molto utilizzate sono \textbf{CrudRepository} e \textbf{ListCrudRepository}, che come dice il nome forniscono funzionalità di tipo CRUD, come la possibilità di salvare un'entità, ottenere una certa entità a partire da un determinato campo identificativo, cancellare un'entità\dots
 
+Nel caso in cui un applicazione richieda più moduli Spring Data, perchè una repository sia un candidato accettabile per uno specifico data modulo, è necessario che estenda una repositroy specifica per quel modulo (ad esempio JpaRepository), o che abbia un'annotazione specifica per quel modulo (ad esempio @Entity per JPA o @Document per MongoDB). Repository che estendono semplicemente Repository o CrudRepository, ad esempio, non sono accettabili.
+
 \subsection{Query Methods}
 Per dichiarare una query si procede in quattro passaggi:
 \begin{enumerate}
@@ -35,3 +37,4 @@ Per dichiarare una query si procede in quattro passaggi:
     \item configurare Spring per creare istanze proxy per queste interfacce tramite JavConfig o XML;
     \item iniettare l'istanza della repository in una classe e utilizzarla.
 \end{enumerate}
+
