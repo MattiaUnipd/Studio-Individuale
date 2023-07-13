@@ -29,13 +29,6 @@ Le repository sono interfacce che forniscono determinate funzionalità per la ge
 
 Nel caso in cui un applicazione richieda più moduli Spring Data, perchè una repository sia un candidato accettabile per uno specifico data modulo, è necessario che estenda una repositroy specifica per quel modulo (ad esempio JpaRepository), o che abbia un'annotazione specifica per quel modulo (ad esempio @Entity per JPA o @Document per MongoDB). Repository che estendono semplicemente Repository o CrudRepository, ad esempio, non sono accettabili.
 
-\subsection{Entities}
-L'entity è il nostro equivalente di una tabella di database realizzata come oggetto. Si tratta di una classe che verrà identificata dall'annotazione @Bean e con dei parametri che rappresentano le colonne della tabella. Questi parametri possono inoltre essere configurati ulteriormente con altre annotazioni, ad esempio:
-\begin{itemize}
-    \item @Id: indica un campo identificativo per l'oggetto;
-    \item @Column: Permette di configurare alcuni campi del parametro (ad esempio length=50, nullable=false\dots)
-\end{itemize}
-
 \subsection{Query Methods}
 Per dichiarare una query si procede in quattro passaggi:
 \begin{enumerate}
@@ -45,32 +38,3 @@ Per dichiarare una query si procede in quattro passaggi:
     \item iniettare l'istanza della repository in una classe e utilizzarla.
 \end{enumerate}
 
-\subsection{Come creare una query}
-Osserviamo un esempio:
-
-List<Person> \textbf{findByEmailAddressAndLastname} (EmailAddress emailAddress, String lastname);
-
-Possiamo dividere la query in 2 parti fondamentali: Subject e Predicate.
-
-La prima parte è formata dalla prima parola e il by, quindi in questo caso:
-
-find \dots by, con la parte compresa tra find e by considerata puramente descrittiva e non impattante sulla query (a meno che non venga utilizzata una keyword quale \textbf{Distinct} che setta una flag).
-
-La seconda parte forma invece il predicate, indicando i campi da cercare: molto semplicemente, si utilizzano condizioni che possono essere concatenate tramite And e Or. E' inoltre fornito supporto per altre espressioni come Like, Less than e così via \dots 
-
-E' possibile inoltre rimuovere ambiguità nei campi utilizzando `\_', ad esempio:
-
-List<Person> \textbf{findByAddress\_ZipCode} (ZipCode zipCode);
-
-significa che voglio utilizzare x.address.zipcode come parametro di ricerca, non AddressZipCode o AddressZip.Code.
-
-\subsection{Keywords}
-Segue una lista di keywords utilizzabili per costruire queries tramite JPA\@
-\begin{itemize}
-    \item \textbf{find/read/get/query/search/stream}: per SELECT, possono ritornare il tipo della repository, una collection, streamable\dots;
-    \item \textbf{exists}: cerca se entry esiste, ritorna un boolean;
-    \item \textbf{count}: ritorna un intero con il numero di entry corrispondente alla ricerca;
-    \item \textbf{delete/remove}: ritorna un void o un delete count;
-    \item \textbf{First<num>/Top<num>}: limita i risultati a <num> specificato, va inserita tra find (o altre keywords) e by;
-    \item \textbf{Distinct}: ritorna solo risultati unici, va inserita tra find (o altre keywords) e by.
-\end{itemize}
