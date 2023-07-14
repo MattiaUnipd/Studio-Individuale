@@ -1,0 +1,21 @@
+\chapter{Spring Core e Spring Boot}
+\section{Spring}
+Spring è un framework basato su due concetti chiave: Dependency Injection e Inversion of Control.
+
+\section{Bean}
+Per realizzarlo si serve di un elemento fondamentale, cioè i Bean. Possono essere realizzati tramite XML o annotazioni, in particolare utilizzando:
+
+\begin{itemize}
+    \item \textbf{@Configuration}: indica che la classe dichiara uno o più metodi Bean, da usare prima della classe;
+    \item \textbf{@ComponentScan}(value=package): specifica i package che vogliamo vengano scannerizzati;
+    \item \textbf{@Bean}: il componente chiave e peculiarità di Spring.
+\end{itemize}
+
+Una volta dichiarato il nostro metodo Bean, sarà possibile ottenere oggetti recuperandoli dal contesto utilizzando il metodo getBean, utilizzando la classe o il nome del bean; utilizzando ciò è possibile ridurre la strettezza dell'accoppiamento riducendo quindi l'effetto a cascata di dover modificare tante classi per la modifica di una sola classe.
+
+E' possibile specificare alcuni parametri per il Bean tra i quali lo scope (in caso non venga definito si tratterà di un singleTon, cioè ritornerà lo stesso oggetto a tutte le chiamate).
+
+Un'altra importante annotazione utilizzata è \textbf{@Autowired}.
+
+\section{Spring Boot}
+E' un'estensione del framework Spring per automatizzare diverse configurazioni che altrimenti andrebbero impostati manualmente, tra cui installazione del server (fornisce infatti un server HTTP già incluso e utilizzabile, alcune librerie spring eccetera \dots).
